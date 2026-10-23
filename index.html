@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Smart Student Planner - organise assignments, deadlines and study time.">
+  <title>Smart Student Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sidebar (desktop) / bottom bar (mobile) -->
+  <aside class="sidebar">
+    <div class="brand">🎓 Smart<span>Planner</span></div>
+    <nav>
+      <button class="nav-btn active" data-view="dashboard"><i>📊</i><span>Dashboard</span></button>
+      <button class="nav-btn" data-view="timetable"><i>🗓️</i><span>Timetable</span></button>
+      <button class="nav-btn" data-view="assignments"><i>📝</i><span>Assignments</span></button>
+    </nav>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div>
+        <h1 id="pageTitle">Dashboard</h1>
+        <p id="todayText"></p>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="view active">
+      <div class="stats">
+        <div class="card stat"><span>Total Tasks</span><strong id="statTotal">0</strong></div>
+        <div class="card stat"><span>Completed</span><strong id="statDone">0</strong></div>
+        <div class="card stat"><span>Pending</span><strong id="statPending">0</strong></div>
+        <div class="card stat warn"><span>Overdue</span><strong id="statOverdue">0</strong></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card progress-card">
+          <h2>Overall Progress</h2>
+          <div class="ring" id="ring"><div class="ring-inner"><strong id="ringText">0%</strong></div></div>
+          <div class="bar" aria-label="Progress bar"><div class="bar-fill" id="barFill"></div></div>
+          <p class="muted" id="progressNote">Add an assignment to get started.</p>
+        </div>
+
+        <div class="card">
+          <h2>Upcoming Deadlines</h2>
+          <ul class="list" id="upcomingList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMETABLE -->
+    <section id="timetable" class="view">
+      <form id="sessionForm" class="card form-row">
+        <select id="sDay" required aria-label="Day">
+          <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
+          <option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
+        </select>
+        <input type="time" id="sStart" required aria-label="Start time">
+        <input type="time" id="sEnd" required aria-label="End time">
+        <input type="text" id="sSubject" placeholder="Subject / topic" maxlength="40" required>
+        <button type="submit" class="btn">+ Add Session</button>
+      </form>
+      <div class="week" id="weekGrid"></div>
+    </section>
+
+    <!-- ASSIGNMENTS -->
+    <section id="assignments" class="view">
+      <form id="taskForm" class="card form-row">
+        <input type="text" id="tTitle" placeholder="Assignment title" maxlength="80" required>
+        <input type="text" id="tSubject" placeholder="Subject" maxlength="40" required>
+        <input type="date" id="tDate" required aria-label="Deadline">
+        <select id="tPriority" aria-label="Priority">
+          <option value="Low">Low</option>
+          <option value="Medium" selected>Medium</option>
+          <option value="High">High</option>
+        </select>
+        <button type="submit" class="btn">+ Add Assignment</button>
+      </form>
+
+      <div class="filters">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="pending">Pending</button>
+        <button class="chip" data-filter="done">Completed</button>
+      </div>
+
+      <ul class="list card" id="taskList"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
